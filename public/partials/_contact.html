@@ -1,0 +1,71 @@
+<section id="contacto">
+  <div class="container mt-1">
+    
+    
+      <div class="col-lg-12">
+        <h2 class="text-center mb-4">Contacto</h2>
+ <hr />
+        <form id="contactForm" novalidate>
+          <div id="responseMessage" class="mb-3"></div>
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre Completo</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nombre"
+              name="nombre"
+              required
+            />
+            <div class="invalid-feedback" id="nombreError"></div>
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label">Correo Electrónico</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              required
+            />
+            <div class="invalid-feedback" id="emailError"></div>
+          </div>
+
+          <div class="mb-3">
+            <label for="telefono" class="form-label"
+              >Teléfono (Opcional)</label
+            >
+            <input
+              type="tel"
+              class="form-control"
+              id="telefono"
+              name="telefono"
+            />
+            <div class="invalid-feedback" id="telefonoError"></div>
+          </div>
+
+          <div class="mb-3">
+            <label for="mensaje" class="form-label">Mensaje</label>
+            <textarea
+              class="form-control"
+              id="mensaje"
+              name="mensaje"
+              rows="5"
+              required
+            ></textarea>
+            <div class="invalid-feedback" id="mensajeError"></div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="submitButton">
+            <span
+              class="spinner-border spinner-border-sm d-none"
+              aria-hidden="true"
+              id="spinner"
+            ></span>
+            <span id="buttonText">Enviar Mensaje</span>
+          </button>
+        </form>
+      </div>
+    
+  </div>
+</section>

@@ -1,0 +1,167 @@
+
+
+/* ---------------------------------- */
+/* 1. Importar los iconos de Bootstrap */
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+
+// Importar todos los estilos SASS de Bootstrap
+@import "bootstrap/scss/bootstrap";
+
+// --- (Opcional) ---
+// Aquí puedes empezar a añadir tus propios estilos SASS 
+// y sobrescribir variables de Bootstrap si lo deseas.
+//
+// Ejemplo de personalización:
+// $primary: #ff6600; // Cambiaría el color primario de Bootstrap
+
+
+
+
+
+
+/* Estilos para las secciones de la página */
+section {
+  // Les damos altura para que el scroll se note
+  padding: 6rem 0;
+  min-height: 100vh; // Hacemos que cada sección ocupe la pantalla
+}
+
+#contacto {
+  // Ajustamos la sección de contacto que ya tenía un 'mt-5'
+  padding: 5rem 0;
+  min-height: auto; // Dejamos que el formulario defina la altura
+}
+
+#inicio {
+  // Hacemos que la sección "Inicio" sea más visual
+  background-color: #343a40; 
+  color: white;
+  min-height: 100vh;
+
+  // LÍNEA NUEVA: Empuja el contenido hacia abajo 
+  // para que no quede oculto por el navbar fixed-top
+  padding-top: 5rem; 
+}
+
+
+
+/* ---------------------------------- */
+/* Módulo Social Bar
+/* ---------------------------------- */
+
+.social-bar-container {
+  // 1. Posición: Fija en el lado izquierdo, centrado verticalmente
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  z-index: 1020; // Ligeramente por debajo del navbar (1030)
+
+  // 2. Lógica de visibilidad: Oculto por defecto
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  // 3. Clase que añadirá TypeScript cuando estemos fuera de "Inicio"
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .nav-link {
+    font-size: 1.8rem; // Icono más grande
+    padding: 0.5rem 0.75rem;
+    background-color: #131204; // Fondo blanco para los iconos
+    border: 1px solid #000000;
+    margin-bottom: 2px; // Pequeña separación
+
+    border-radius: 0 8px 8px 0; // Bordes redondeados a la derecha
+    
+    // 4. ¡Tus colores personalizados!
+    &.icon-facebook { 
+      color: #1877F2; // Azul de Facebook
+    }
+    &.icon-instagram { 
+      color: #E4405F; // Rosa/Rojo de Instagram
+    }
+    &.icon-x { 
+      color: #ffffff; // Negro de X
+    }
+
+    &:hover {
+      filter: brightness(0.9); // Efecto hover sutil
+    }
+  }
+}
+
+
+
+
+/* ---------------------------------- */
+/* Módulo Navbar - Estilo del Enlace Activo
+/* ---------------------------------- */
+
+.navbar-nav {
+  .nav-link {
+    // 1. Estilo base del enlace
+    color: rgba(255, 255, 255, 0.75); // Un poco atenuado
+    position: relative; // Necesario para el pseudo-elemento ::after
+    padding-bottom: 0.75rem; // Espacio extra abajo para la línea
+    transition: color 0.3s ease-in-out;
+
+    // 2. La "línea de marcado" (oculta por defecto)
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0.25rem; // Posición de la línea
+      left: 50%;
+      transform: translateX(-50%); // Centrar la línea
+      
+      width: 0; // Oculta por defecto
+      height: 2px;
+      background-color: #ffffff;
+      
+      transition: width 0.3s ease-in-out; // Transición de aparición
+    }
+  }
+
+  // 3. El ESTADO ACTIVO (y hover)
+  .nav-link.active,
+  .nav-link:hover {
+    color: #ffffff; // Blanco brillante
+
+    &::after {
+      width: 70%; // Mostrar la línea (al 70% del ancho del enlace)
+    }
+  }
+}
+
+
+
+/* ---------------------------------- */
+/* Módulo Galería (Carousel)
+/* ---------------------------------- */
+
+#galeria {
+  // Le damos un poco más de espacio vertical
+  padding: 10rem 0; 
+  
+  .carousel-item {
+    // Forzar una altura fija para todos los slides
+    // Ajusta este valor (en vh, rem, o px) según te guste
+    height: 60vh; 
+    min-height: 400px; // Un mínimo por si 60vh es muy poco
+    max-height: 700px; // Un máximo por si 60vh es mucho
+
+    img {
+      // Asegurar que la imagen cubra el espacio
+      // sin deformarse (se recortará si es necesario)
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      // Un filtro sutil para que las imágenes se vean mejor
+      filter: brightness(0.9); 
+    }
+  }
+}
