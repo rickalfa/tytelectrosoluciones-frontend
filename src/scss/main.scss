@@ -41,7 +41,7 @@ section {
 
   // LÍNEA NUEVA: Empuja el contenido hacia abajo 
   // para que no quede oculto por el navbar fixed-top
-  padding-top: 5rem; 
+ // padding-top: 5rem; 
 }
 
 
@@ -145,14 +145,14 @@ section {
 
 #galeria {
   // Le damos un poco más de espacio vertical
-  padding: 10rem 0; 
+  padding: 5rem 0; 
   
   .carousel-item {
     // Forzar una altura fija para todos los slides
     // Ajusta este valor (en vh, rem, o px) según te guste
-    height: 60vh; 
-    min-height: 400px; // Un mínimo por si 60vh es muy poco
-    max-height: 700px; // Un máximo por si 60vh es mucho
+    height: 78vh; 
+    min-height: 600px; // Un mínimo por si 60vh es muy poco
+    max-height: 900px; // Un máximo por si 60vh es mucho
 
     img {
       // Asegurar que la imagen cubra el espacio
@@ -164,4 +164,98 @@ section {
       filter: brightness(0.9); 
     }
   }
+}
+
+
+
+
+
+
+/* ---------------------------------- */
+/* Módulo WhatsApp (Botón Flotante)
+/* ---------------------------------- */
+
+// 1. Definición de la animación "Pulso"
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+// 2. Contenedor principal del botón
+.whatsapp-container {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 1050; // Z-index alto para que esté encima de todo
+}
+
+// 3. El botón (círculo verde)
+.whatsapp-float {
+  position: relative; // Necesario para el pseudo-elemento
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 70px;
+  height: 70px;
+  background-color: #25D366; // Verde WhatsApp
+  color: #FFF; // Icono blanco
+  border-radius: 50%; // Círculo perfecto
+  font-size: 2.4rem; // Tamaño del icono
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1); // Se agranda un poco al pasar el mouse
+  }
+  
+  // 4. ¡La Animación! El círculo verde que se expande
+  // Usamos '::after' para crear el círculo del pulso
+  &::after {
+    content: '';
+    position: absolute;
+    width: 110%;
+    height: 120%;
+    top: 0;
+    left: 0;
+    
+    background-color: #25D366; // Verde WhatsApp
+    border-radius: 70%;
+    z-index: -1; // Lo ponemos DETRÁS del botón
+    
+    // Aplicamos la animación
+    animation: pulse 2s infinite; // 2 segundos, repetición infinita
+  }
+}
+
+
+/* ---------------------------------- */
+/* Módulo Animación de Scroll
+/* ---------------------------------- */
+
+// 1. Clase base: Oculta el elemento al inicio
+// Mueve el elemento 30px hacia abajo y lo hace invisible.
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(90px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  // transition-delay se añadirá desde TypeScript
+}
+
+// 2. Clase 'is-visible': La añade TypeScript
+// Devuelve el elemento a su posición original (Y=0) y lo hace visible.
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }

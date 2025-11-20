@@ -15,11 +15,17 @@ import { initNavigation } from './modules/navigation.ts';
 
 import { initSocialBar } from './modules/socialbar.ts'; // <-- LÍNEA NUEVA
 
+import { initScrollAnimations } from './ui/scrollAnimator';
 // Importar nuestro archivo SASS principal (que ahora incluye Bootstrap)
 import './scss/main.scss';
 
 // Importar todo el JavaScript de Bootstrap (para componentes como menús, modales, etc.)
 import 'bootstrap';
+
+
+
+
+
 
 // --- El resto de tu código de main.ts (como 'import './style.css'') ---
 // ...// 3. Importar nuestro nuevo módulo de contacto
@@ -29,18 +35,32 @@ async function initializeApp() {
   // (La URL '/partials/_navbar.html' funciona porque está en la carpeta 'public')
   const loadNav = loadHTML('#navbar-placeholder', '/partials/_navbar.html');
   const loadContact = loadHTML('#contact-placeholder', '/partials/_contact.html');
-const loadSocialBar = loadHTML('#socialbar-placeholder', '/partials/_socialbar.html'); 
-const loadGallery = loadHTML('#gallery-placeholder', '/partials/_gallery.html'); 
+  const loadSocialBar = loadHTML('#socialbar-placeholder', '/partials/_socialbar.html'); 
+  const loadGallery = loadHTML('#gallery-placeholder', '/partials/_gallery.html'); 
+
+  const loadWhatsApp = loadHTML('#whatsapp-placeholder', '/partials/_whatsapp.html');
+
+  const loadNosotros = loadHTML('#nosotros-placeholder', '/partials/_nosotros.html');
+
+
   // 2. Ejecutar todas las cargas de HTML en paralelo y esperar a que terminen
-  await Promise.all([loadNav, loadContact, loadSocialBar,loadGallery ]);
+  await Promise.all([loadNav, 
+    loadContact, 
+    loadSocialBar,
+    loadGallery,
+     loadContact, 
+     loadWhatsApp,
+    loadNosotros]);
 
   // 3. AHORA que el navbar existe, inicializamos la navegación
   initNavigation();
   
+ 
+
+
   // El formulario de contacto no depende del navbar, así que puede ir aquí
  initContactForm();
-
- initSocialBar();
+initScrollAnimations();
 }
 
 // 5. Usamos 'DOMContentLoaded' para llamar a nuestra función async
