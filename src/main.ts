@@ -13,7 +13,7 @@ import { loadHTML } from './ui/htmlLoader.ts'; // <-- 1. IMPORTAMOS EL CARGADOR
 
 import { initNavigation } from './modules/navigation.ts';
 
-import { initSocialBar } from './modules/socialbar.ts'; // <-- LÍNEA NUEVA
+///import { initSocialBar } from './modules/socialbar.ts'; // <-- LÍNEA NUEVA
 
 import { initScrollAnimations } from './ui/scrollAnimator';
 // Importar nuestro archivo SASS principal (que ahora incluye Bootstrap)
@@ -42,15 +42,17 @@ async function initializeApp() {
 
   const loadNosotros = loadHTML('#nosotros-placeholder', '/partials/_nosotros.html');
 
+  const loadService = loadHTML("#service-placeholder", '/partials/_service.html');
 
   // 2. Ejecutar todas las cargas de HTML en paralelo y esperar a que terminen
   await Promise.all([loadNav, 
     loadContact, 
     loadSocialBar,
     loadGallery,
-     loadContact, 
-     loadWhatsApp,
-    loadNosotros]);
+    loadContact, 
+    loadWhatsApp,
+    loadNosotros,
+    loadService]);
 
   // 3. AHORA que el navbar existe, inicializamos la navegación
   initNavigation();
@@ -61,6 +63,82 @@ async function initializeApp() {
   // El formulario de contacto no depende del navbar, así que puede ir aquí
  initContactForm();
 initScrollAnimations();
+
+try {
+    const carousel = document.getElementById("serviceCarousel");
+
+
+  if (carousel != null ) {
+    
+      carousel.addEventListener("slide.bs.carousel", function (event) {
+
+          const e = event as unknown as { relatedTarget: HTMLElement };
+         const next = e.relatedTarget;
+        
+
+          const title = next.getAttribute("data-title");
+          const desc = next.getAttribute("data-description");
+          const bg = next.getAttribute("data-bg");
+          const Icon = next.getAttribute("data-icon");
+
+        const textCont =  document.getElementById("serviceTitle");
+
+
+        if (textCont != null) {
+          textCont.textContent = title;
+          
+        } 
+
+          
+        const textServDesc =  document.getElementById("serviceDesc");
+
+        if (textServDesc != null) {
+          textServDesc.textContent = desc;
+          
+        }
+
+        const serviceBg = document.getElementById("service");
+
+        if (serviceBg != null) {
+
+
+
+         if (bg != null) {
+           serviceBg.style.backgroundImage = bg;
+         }
+          
+        }
+
+       
+        const IconData = document.querySelector<HTMLImageElement>(".service-icon");
+
+        if(IconData != null){
+
+         //  console.log("path icon : "+ Icon);
+
+
+        IconData.src =  Icon ?? "";
+
+        }else{
+         // console.log(" IconData es null");
+        }
+
+      });
+
+  } else {
+    
+  }
+  
+} catch (error) {
+  
+}
+
+ 
+
+
+
+
+
 }
 
 // 5. Usamos 'DOMContentLoaded' para llamar a nuestra función async
